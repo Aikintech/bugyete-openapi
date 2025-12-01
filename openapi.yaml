@@ -1,0 +1,695 @@
+openapi: 3.0.0
+x-stoplight:
+  id: tjd1bweye6yb9
+info:
+  title: Openapi
+  version: "1.0"
+servers:
+  - url: "http://localhost:3000"
+paths:
+  /client/categories:
+    get:
+      summary: Get categories
+      tags:
+        - Categories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-categories
+      x-stoplight:
+        id: jmmme2unrr8ru
+      description: Get categories
+      security:
+        - X-Api-Key: []
+    post:
+      summary: Create category
+      tags:
+        - Categories
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: post-client-categories
+      x-stoplight:
+        id: 6g755des2iyp6
+      description: Create category
+      security:
+        - X-Api-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreCategoryRequest"
+  "/client/categories/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get category
+      tags:
+        - Categories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-categories-id
+      x-stoplight:
+        id: hh1kfkbqdun7b
+      description: Get category
+      security:
+        - X-Api-Key: []
+    patch:
+      summary: Update category
+      tags:
+        - Categories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: patch-client-categories-id
+      x-stoplight:
+        id: ssu6yojg4ts30
+      description: Update category
+      security:
+        - X-Api-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreCategoryRequest"
+    delete:
+      summary: Delete category
+      tags:
+        - Categories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: delete-client-categories-id
+      x-stoplight:
+        id: flpj4uv29z32v
+      description: Delete category
+      security:
+        - X-Api-Key: []
+  /client/budgets:
+    get:
+      summary: Get budgets
+      tags:
+        - Budgets
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Budgets"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-budgets
+      x-stoplight:
+        id: sbc5n7mfhtosy
+      description: Get budgets
+      security:
+        - X-Api-Key: []
+    post:
+      summary: Create budget
+      tags:
+        - Budgets
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Budget"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: post-client-budgets
+      x-stoplight:
+        id: ynoabkwfzxccn
+      description: Create budget
+      security:
+        - X-Api-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreBudgetRequest"
+  "/client/budgets/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get budget
+      tags:
+        - Budgets
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Budget"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-budgets-id
+      x-stoplight:
+        id: k8buy2ptfptwh
+      description: Get budget
+      security:
+        - X-Api-Key: []
+    patch:
+      summary: Update budget
+      tags:
+        - Budgets
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: patch-client-budgets-id
+      x-stoplight:
+        id: afchq8qzivpg6
+      description: Update budget
+      security:
+        - X-Api-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreBudgetRequest"
+    delete:
+      summary: Delete budget
+      tags:
+        - Budgets
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: delete-client-budgets-id
+      x-stoplight:
+        id: or3bz41k6biit
+      description: Delete budget
+      security:
+        - X-Api-Key: []
+components:
+  schemas:
+    User:
+      title: User
+      x-stoplight:
+        id: 9xxxwhr92r5rz
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: x22orb1yy5mep
+    Category:
+      type: object
+      x-examples: {}
+      required:
+        - id
+        - name
+        - type
+        - user_defined
+        - created_at
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+          x-stoplight:
+            id: 5751b5akqrlmp
+        color:
+          type: string
+          x-stoplight:
+            id: 0hgs3twa4rz49
+        icon:
+          type: string
+          x-stoplight:
+            id: oe9pqu48txz9k
+        user_defined:
+          type: boolean
+        created_at:
+          type: string
+    Account:
+      title: Account
+      x-stoplight:
+        id: czf4guz1nwamt
+      type: object
+      required:
+        - id
+        - user_id
+        - name
+        - type
+        - currency
+        - balance
+        - created_at
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: mzhqauaxz2ox9
+        user_id:
+          type: string
+          x-stoplight:
+            id: zs9zv3bz7vh5g
+        name:
+          type: string
+          x-stoplight:
+            id: 6qeywthvno6x3
+        type:
+          type: string
+          x-stoplight:
+            id: 0a0hrnuv24mqo
+        currency:
+          type: string
+          x-stoplight:
+            id: tw6lzqrouvjaf
+        balance:
+          type: integer
+          x-stoplight:
+            id: w66sxreqq9yul
+        created_at:
+          type: string
+          x-stoplight:
+            id: nvzid0h3ai492
+    Budget:
+      type: object
+      x-examples: {}
+      required:
+        - id
+        - category_id
+        - name
+        - amount
+        - currency
+        - period
+        - is_recurring
+        - alert_threshold
+        - created_at
+      properties:
+        id:
+          type: string
+        category_id:
+          type: string
+        name:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        period:
+          type: string
+        start_date:
+          type: string
+          x-stoplight:
+            id: wdafgqk4hj8pe
+        end_date:
+          type: string
+          x-stoplight:
+            id: ywq47zbe09oc9
+        is_recurring:
+          type: boolean
+        alert_threshold:
+          type: array
+          items:
+            type: integer
+        created_at:
+          type: string
+    Transaction:
+      title: Transaction
+      x-stoplight:
+        id: p09e9d224ys8b
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 9blabxy55ae0e
+    Message:
+      title: Message
+      x-stoplight:
+        id: 9vcfk10naorkt
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          x-stoplight:
+            id: h4es4cfl6lepr
+    Notification:
+      title: Notification
+      x-stoplight:
+        id: gyrwrg45nfbse
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: ci81t01j5ks5o
+    Categories:
+      title: Categories
+      x-stoplight:
+        id: a62n1im3mczqi
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
+    Budgets:
+      title: Budgets
+      x-stoplight:
+        id: nx3kcgl8ax40q
+      type: array
+      items:
+        $ref: "#/components/schemas/Budget"
+    StoreCategoryRequest:
+      type: object
+      x-examples: {}
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        icon:
+          type: string
+          x-stoplight:
+            id: cmbi33qup7bt0
+        color:
+          type: string
+          x-stoplight:
+            id: ivpwmznn65w4n
+        description:
+          type: string
+          x-stoplight:
+            id: a6x8dg4907z27
+    StoreBudgetRequest:
+      type: object
+      x-examples: {}
+      required:
+        - amount
+        - currency
+        - category_id
+      properties:
+        amount:
+          type: integer
+        currency:
+          type: string
+        category_id:
+          type: string
+    StoreAccountRequest:
+      title: StoreAccountRequest
+      x-stoplight:
+        id: 28yj0fdmhh40h
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 6gh9trpjq2i9j
+    ValidationErrors:
+      title: ValidationErrors
+      x-stoplight:
+        id: 8ao7evn39cf11
+      type: object
+      required:
+        - message
+        - errors
+      properties:
+        message:
+          type: string
+          x-stoplight:
+            id: dsjf2t6j8j8jn
+        errors:
+          type: array
+          x-stoplight:
+            id: iezcjyfdmv23v
+          items:
+            x-stoplight:
+              id: oloo6rjef8scf
+            type: object
+            required:
+              - field
+              - reasons
+            properties:
+              field:
+                type: string
+                x-stoplight:
+                  id: i7zv81raufxa7
+              reasons:
+                type: array
+                x-stoplight:
+                  id: n9eulkgqhv6wz
+                items:
+                  x-stoplight:
+                    id: 2argmvid79fyz
+                  type: string
+  securitySchemes:
+    X-Api-Key:
+      name: X-Api-Key
+      type: apiKey
+      in: header
+tags:
+  - name: Accounts
+  - name: Budgets
+  - name: Categories
+  - name: Expenses
+  - name: Transactions
