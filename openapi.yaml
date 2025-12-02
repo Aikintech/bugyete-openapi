@@ -635,6 +635,162 @@ paths:
       description: Delete transaction
       security:
         - X-Api-Key: []
+  /client/reports/expenses/summary:
+    get:
+      summary: Expenses summary
+      tags:
+        - Reports
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    expenses_by_category:
+                      - category_name: Rent
+                        amount_spent: 350.5
+                        total_transactions: 2
+                    report_period: 2025-11-01 to 2025-11-30
+                required:
+                  - expenses_by_category
+                  - report_period
+                properties:
+                  expenses_by_category:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - category_name
+                        - amount_spent
+                        - total_transactions
+                      properties:
+                        category_name:
+                          type: string
+                        amount_spent:
+                          type: number
+                        total_transactions:
+                          type: integer
+                  report_period:
+                    type: string
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-reports-expenses-summary
+      x-stoplight:
+        id: oqcx0qz0vvcfs
+      security:
+        - X-Api-Key: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          required: true
+  /client/reports/budgets/summary:
+    get:
+      summary: Budgets summary
+      tags:
+        - Reports
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    budget_status:
+                      - category_name: Rent
+                        budgeted_amount: 2000
+                        amount_spent: 350.5
+                        remaining_amount: 1649.5
+                        status: UNDER
+                    report_period: 2025-11-01 to 2025-11-30
+                required:
+                  - budget_status
+                  - report_period
+                properties:
+                  budget_status:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - category_name
+                        - budgeted_amount
+                        - amount_spent
+                        - remaining_amount
+                        - status
+                      properties:
+                        category_name:
+                          type: string
+                        budgeted_amount:
+                          type: number
+                        amount_spent:
+                          type: number
+                        remaining_amount:
+                          type: number
+                        status:
+                          type: string
+                  report_period:
+                    type: string
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-reports-budgets-summary
+      x-stoplight:
+        id: w4wji8rqvhskj
+      security:
+        - X-Api-Key: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          required: true
 components:
   schemas:
     User:
@@ -1041,5 +1197,5 @@ tags:
   - name: Accounts
   - name: Budgets
   - name: Categories
-  - name: Expenses
+  - name: Reports
   - name: Transactions
