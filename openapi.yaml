@@ -1043,10 +1043,10 @@ components:
       required:
         - id
         - category_id
-        - name
         - amount
         - currency
         - period
+        - start_date
         - is_recurring
         - alert_threshold
         - created_at
@@ -1054,8 +1054,6 @@ components:
         id:
           type: string
         category_id:
-          type: string
-        name:
           type: string
         amount:
           type: integer
