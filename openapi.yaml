@@ -2,7 +2,7 @@ openapi: 3.0.0
 x-stoplight:
   id: tjd1bweye6yb9
 info:
-  title: Openapi
+  title: Bugyete API
   version: "1.0"
 servers:
   - url: "http://localhost:3000"
@@ -220,6 +220,72 @@ paths:
       description: Delete category
       security:
         - X-Api-Key: []
+  "/client/categories/{id}/transactions":
+    get:
+      summary: Get category transactions
+      tags:
+        - Categories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transactions"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-categories-id-transactions
+      x-stoplight:
+        id: hmhqmtofd7cfz
+      security:
+        - X-Api-Key: []
+      description: Get category transactions
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: page
+        - schema:
+            type: number
+          in: query
+          name: size
+        - schema:
+            type: string
+            enum:
+              - ALL
+              - EXPENSE
+              - INCOME
+          in: query
+          name: type
+          description: transaction type
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
   /client/budgets:
     get:
       summary: Get budgets
@@ -709,9 +775,99 @@ paths:
           in: query
           name: end_date
           required: true
+      description: Get a summary of expenses for a specific period
+  /client/reports/spending/trend:
+    get:
+      summary: Expenses trend
+      tags:
+        - Reports
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    spending_trend:
+                      - date: "2023-10-01"
+                        total_spent: 100
+                      - date: "2023-10-02"
+                        total_spent: 150
+                      - date: "2023-10-03"
+                        total_spent: 200
+                    total_spent_for_period: 450
+                required:
+                  - spending_trend
+                  - report_period
+                properties:
+                  spending_trend:
+                    type: array
+                    items:
+                      type: object
+                      x-stoplight:
+                        id: sls8rz5fdwve8
+                      required:
+                        - date
+                        - amount_spent
+                      properties:
+                        date:
+                          type: string
+                        amount_spent:
+                          type: number
+                          x-stoplight:
+                            id: gg2cwr89kdjoz
+                  report_period:
+                    type: string
+                    x-stoplight:
+                      id: d1qoxmrio6j8x
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-reports-spending-trend
+      security: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          required: true
+        - schema:
+            type: string
+            enum:
+              - DAILY
+              - WEEKLY
+              - MONTHLY
+          in: query
+          name: period
+      description: Get a ctrend of expenses over time
+      x-stoplight:
+        id: erxxs7oh7sj88
+    parameters: []
   /client/reports/budgets/summary:
     get:
-      summary: Budgets summary
+      summary: Budget vs. Actual Spending
       tags:
         - Reports
       responses:
@@ -791,6 +947,7 @@ paths:
           in: query
           name: end_date
           required: true
+      description: Compare the user's planned budgets to actual spending for a given period
 components:
   schemas:
     User:
