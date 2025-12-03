@@ -2,7 +2,7 @@ openapi: 3.0.0
 x-stoplight:
   id: tjd1bweye6yb9
 info:
-  title: Openapi
+  title: Bugyete API
   version: "1.0"
 servers:
   - url: "http://localhost:3000"
@@ -220,6 +220,72 @@ paths:
       description: Delete category
       security:
         - X-Api-Key: []
+  "/client/categories/{id}/transactions":
+    get:
+      summary: Get category transactions
+      tags:
+        - Categories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transactions"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-categories-id-transactions
+      x-stoplight:
+        id: hmhqmtofd7cfz
+      security:
+        - X-Api-Key: []
+      description: Get category transactions
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: page
+        - schema:
+            type: number
+          in: query
+          name: size
+        - schema:
+            type: string
+            enum:
+              - ALL
+              - EXPENSE
+              - INCOME
+          in: query
+          name: type
+          description: transaction type
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
   /client/budgets:
     get:
       summary: Get budgets
@@ -422,6 +488,466 @@ paths:
       description: Delete budget
       security:
         - X-Api-Key: []
+  /client/transactions:
+    get:
+      summary: Get transactions
+      tags:
+        - Transactions
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transactions"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-client-transactions
+      x-stoplight:
+        id: wni11dwjoczkt
+      description: Get transactions
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: size
+      security:
+        - X-Api-Key: []
+    post:
+      summary: Create transaction
+      tags:
+        - Transactions
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: post-client-transactions
+      x-stoplight:
+        id: eaoh2w312pgmw
+      security:
+        - X-Api-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreTransactionRequest"
+  "/client/transactions/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get transaction
+      tags:
+        - Transactions
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-transactions-id
+      x-stoplight:
+        id: 4rgeoaaxnqych
+      security:
+        - X-Api-Key: []
+    patch:
+      summary: Update transaction
+      tags:
+        - Transactions
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: patch-client-transactions-id
+      x-stoplight:
+        id: e2kok2u43q39i
+      description: Update transaction
+      security:
+        - X-Api-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreTransactionRequest"
+    delete:
+      summary: Delete transaction
+      tags:
+        - Transactions
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: delete-client-transactions-id
+      x-stoplight:
+        id: fq3thl0pcozm1
+      description: Delete transaction
+      security:
+        - X-Api-Key: []
+  /client/reports/expenses/summary:
+    get:
+      summary: Expenses summary
+      tags:
+        - Reports
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    expenses_by_category:
+                      - category_name: Rent
+                        amount_spent: 350.5
+                        total_transactions: 2
+                    report_period: 2025-11-01 to 2025-11-30
+                required:
+                  - expenses_by_category
+                  - report_period
+                properties:
+                  expenses_by_category:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - category_name
+                        - amount_spent
+                        - total_transactions
+                      properties:
+                        category_name:
+                          type: string
+                        amount_spent:
+                          type: number
+                        total_transactions:
+                          type: integer
+                  report_period:
+                    type: string
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-reports-expenses-summary
+      x-stoplight:
+        id: oqcx0qz0vvcfs
+      security:
+        - X-Api-Key: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          required: true
+      description: Get a summary of expenses for a specific period
+  /client/reports/spending/trend:
+    get:
+      summary: Expenses trend
+      tags:
+        - Reports
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    spending_trend:
+                      - date: "2023-10-01"
+                        total_spent: 100
+                      - date: "2023-10-02"
+                        total_spent: 150
+                      - date: "2023-10-03"
+                        total_spent: 200
+                    total_spent_for_period: 450
+                required:
+                  - spending_trend
+                  - report_period
+                properties:
+                  spending_trend:
+                    type: array
+                    items:
+                      type: object
+                      x-stoplight:
+                        id: sls8rz5fdwve8
+                      required:
+                        - date
+                        - amount_spent
+                      properties:
+                        date:
+                          type: string
+                        amount_spent:
+                          type: number
+                          x-stoplight:
+                            id: gg2cwr89kdjoz
+                  report_period:
+                    type: string
+                    x-stoplight:
+                      id: d1qoxmrio6j8x
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-reports-spending-trend
+      security: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          required: true
+        - schema:
+            type: string
+            enum:
+              - DAILY
+              - WEEKLY
+              - MONTHLY
+          in: query
+          name: period
+      description: Get a ctrend of expenses over time
+      x-stoplight:
+        id: erxxs7oh7sj88
+    parameters: []
+  /client/reports/budgets/summary:
+    get:
+      summary: Budget vs. Actual Spending
+      tags:
+        - Reports
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    budget_status:
+                      - category_name: Rent
+                        budgeted_amount: 2000
+                        amount_spent: 350.5
+                        remaining_amount: 1649.5
+                        status: UNDER
+                    report_period: 2025-11-01 to 2025-11-30
+                required:
+                  - budget_status
+                  - report_period
+                properties:
+                  budget_status:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - category_name
+                        - budgeted_amount
+                        - amount_spent
+                        - remaining_amount
+                        - status
+                      properties:
+                        category_name:
+                          type: string
+                        budgeted_amount:
+                          type: number
+                        amount_spent:
+                          type: number
+                        remaining_amount:
+                          type: number
+                        status:
+                          type: string
+                  report_period:
+                    type: string
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+      operationId: get-client-reports-budgets-summary
+      x-stoplight:
+        id: w4wji8rqvhskj
+      security:
+        - X-Api-Key: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          required: true
+      description: Compare the user's planned budgets to actual spending for a given period
 components:
   schemas:
     User:
@@ -553,15 +1079,78 @@ components:
         created_at:
           type: string
     Transaction:
-      title: Transaction
+      type: object
+      x-examples: {}
+      required:
+        - id
+        - user_id
+        - account_id
+        - category_id
+        - amount
+        - currency
+        - type
+        - transaction_date
+        - created_at
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        account_id:
+          type: string
+        category_id:
+          type: string
+        budget_id:
+          type: string
+          x-stoplight:
+            id: o4izjcpv51qsx
+        amount:
+          type: integer
+        currency:
+          type: string
+        type:
+          type: string
+        transaction_date:
+          type: string
+        payee:
+          type: string
+          x-stoplight:
+            id: kay9fczp9fg4q
+        notes:
+          type: string
+          x-stoplight:
+            id: wiuxhul5n4re6
+        receipt:
+          $ref: "#/components/schemas/FileUpload"
+        created_at:
+          type: string
+    FileUpload:
+      title: FileUpload
       x-stoplight:
-        id: p09e9d224ys8b
+        id: 3nk5y1vnyeuju
+      type: object
+      required:
+        - file_id
+        - url
+      properties:
+        file_id:
+          type: string
+          x-stoplight:
+            id: fq0cxlt7eipq6
+        url:
+          type: string
+          x-stoplight:
+            id: 76isy9cakkp58
+    Notification:
+      title: Notification
+      x-stoplight:
+        id: gyrwrg45nfbse
       type: object
       properties:
         id:
           type: string
           x-stoplight:
-            id: 9blabxy55ae0e
+            id: ci81t01j5ks5o
     Message:
       title: Message
       x-stoplight:
@@ -574,16 +1163,6 @@ components:
           type: string
           x-stoplight:
             id: h4es4cfl6lepr
-    Notification:
-      title: Notification
-      x-stoplight:
-        id: gyrwrg45nfbse
-      type: object
-      properties:
-        id:
-          type: string
-          x-stoplight:
-            id: ci81t01j5ks5o
     Categories:
       title: Categories
       x-stoplight:
@@ -598,6 +1177,79 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Budget"
+    Transactions:
+      title: Transactions
+      x-stoplight:
+        id: dyirvt94w0zyv
+      type: object
+      required:
+        - items
+        - meta
+      properties:
+        items:
+          type: array
+          x-stoplight:
+            id: gixxu1u7l8639
+          items:
+            $ref: "#/components/schemas/Transaction"
+        meta:
+          type: object
+          x-stoplight:
+            id: 9fh8m1l41ulss
+          required:
+            - page
+            - size
+            - total
+          properties:
+            page:
+              type: integer
+              x-stoplight:
+                id: cfdwmlyexjgey
+            size:
+              type: integer
+              x-stoplight:
+                id: ddw0qofxepsc8
+            total:
+              type: integer
+              x-stoplight:
+                id: bpywqmm1fqchb
+    ValidationErrors:
+      title: ValidationErrors
+      x-stoplight:
+        id: 8ao7evn39cf11
+      type: object
+      required:
+        - message
+        - errors
+      properties:
+        message:
+          type: string
+          x-stoplight:
+            id: dsjf2t6j8j8jn
+        errors:
+          type: array
+          x-stoplight:
+            id: iezcjyfdmv23v
+          items:
+            x-stoplight:
+              id: oloo6rjef8scf
+            type: object
+            required:
+              - field
+              - reasons
+            properties:
+              field:
+                type: string
+                x-stoplight:
+                  id: i7zv81raufxa7
+              reasons:
+                type: array
+                x-stoplight:
+                  id: n9eulkgqhv6wz
+                items:
+                  x-stoplight:
+                    id: 2argmvid79fyz
+                  type: string
     StoreCategoryRequest:
       type: object
       x-examples: {}
@@ -645,43 +1297,54 @@ components:
           type: string
           x-stoplight:
             id: 6gh9trpjq2i9j
-    ValidationErrors:
-      title: ValidationErrors
+    StoreTransactionRequest:
+      title: StoreTransactionRequest
       x-stoplight:
-        id: 8ao7evn39cf11
+        id: 0sqlwo3avvs1r
       type: object
       required:
-        - message
-        - errors
+        - amount
+        - account_id
+        - category_id
+        - type
+        - transaction_date
       properties:
-        message:
+        amount:
+          type: integer
+          x-stoplight:
+            id: urm189ooxtipl
+        account_id:
           type: string
           x-stoplight:
-            id: dsjf2t6j8j8jn
-        errors:
-          type: array
+            id: kmv9f74kfprph
+        category_id:
+          type: string
           x-stoplight:
-            id: iezcjyfdmv23v
-          items:
-            x-stoplight:
-              id: oloo6rjef8scf
-            type: object
-            required:
-              - field
-              - reasons
-            properties:
-              field:
-                type: string
-                x-stoplight:
-                  id: i7zv81raufxa7
-              reasons:
-                type: array
-                x-stoplight:
-                  id: n9eulkgqhv6wz
-                items:
-                  x-stoplight:
-                    id: 2argmvid79fyz
-                  type: string
+            id: hhud7kchdl6qb
+        budget_id:
+          type: string
+          x-stoplight:
+            id: gkarlsjv2ix29
+        type:
+          x-stoplight:
+            id: fjwvaw1eroy7x
+          enum:
+            - EXPENSE
+            - INCOME
+        transaction_date:
+          type: string
+          x-stoplight:
+            id: twdfxivnfekbx
+        notes:
+          type: string
+          x-stoplight:
+            id: 7cgl0ptebeui4
+        payee:
+          type: string
+          x-stoplight:
+            id: pgswijjfcbv9i
+        receipt:
+          $ref: "#/components/schemas/FileUpload"
   securitySchemes:
     X-Api-Key:
       name: X-Api-Key
@@ -691,5 +1354,5 @@ tags:
   - name: Accounts
   - name: Budgets
   - name: Categories
-  - name: Expenses
+  - name: Reports
   - name: Transactions
