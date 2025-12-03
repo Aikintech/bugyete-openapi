@@ -841,7 +841,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Message"
       operationId: get-client-reports-spending-trend
-      security: []
+      security:
+        - X-Api-Key: []
       parameters:
         - schema:
             type: string
