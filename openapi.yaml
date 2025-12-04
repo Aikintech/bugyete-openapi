@@ -3,9 +3,9 @@ x-stoplight:
   id: tjd1bweye6yb9
 info:
   title: Bugyete API
-  version: '1.0'
+  version: "1.0"
 servers:
-  - url: 'http://localhost:3000'
+  - url: "http://localhost:3000"
 paths:
   /client/categories:
     get:
@@ -13,71 +13,79 @@ paths:
       tags:
         - Categories
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Categories'
-        '401':
+                $ref: "#/components/schemas/Categories"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-categories
       x-stoplight:
         id: jmmme2unrr8ru
       description: Get categories
       security:
         - X-Api-Key: []
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - EXPENSE
+              - INCOME
+          in: query
+          name: type
     post:
       summary: Create category
       tags:
         - Categories
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Category'
-        '400':
+                $ref: "#/components/schemas/Category"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '409':
+                $ref: "#/components/schemas/Message"
+        "409":
           description: Conflict
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '422':
+                $ref: "#/components/schemas/Message"
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationErrors'
-        '500':
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: post-client-categories
       x-stoplight:
         id: 6g755des2iyp6
@@ -88,8 +96,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoreCategoryRequest'
-  '/client/categories/{id}':
+              $ref: "#/components/schemas/StoreCategoryRequest"
+  "/client/categories/{id}":
     parameters:
       - schema:
           type: string
@@ -101,30 +109,30 @@ paths:
       tags:
         - Categories
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Category'
-        '401':
+                $ref: "#/components/schemas/Category"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '404':
+                $ref: "#/components/schemas/Message"
+        "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-categories-id
       x-stoplight:
         id: hh1kfkbqdun7b
@@ -136,44 +144,44 @@ paths:
       tags:
         - Categories
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Category'
-        '400':
+                $ref: "#/components/schemas/Category"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '409':
+                $ref: "#/components/schemas/Message"
+        "409":
           description: Conflict
           content:
             application/json:
               schema:
                 type: object
                 properties: {}
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
               schema:
                 type: object
                 properties: {}
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: patch-client-categories-id
       x-stoplight:
         id: ssu6yojg4ts30
@@ -184,78 +192,78 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoreCategoryRequest'
+              $ref: "#/components/schemas/StoreCategoryRequest"
     delete:
       summary: Delete category
       tags:
         - Categories
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '403':
+                $ref: "#/components/schemas/Message"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: delete-client-categories-id
       x-stoplight:
         id: flpj4uv29z32v
       description: Delete category
       security:
         - X-Api-Key: []
-  '/client/categories/{id}/transactions':
+  "/client/categories/{id}/transactions":
     get:
       summary: Get category transactions
       tags:
         - Categories
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transactions'
-        '400':
+                $ref: "#/components/schemas/Transactions"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '403':
+                $ref: "#/components/schemas/Message"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-categories-id-transactions
       x-stoplight:
         id: hmhqmtofd7cfz
@@ -274,7 +282,6 @@ paths:
         - schema:
             type: string
             enum:
-              - ALL
               - EXPENSE
               - INCOME
           in: query
@@ -292,24 +299,24 @@ paths:
       tags:
         - Budgets
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Budgets'
-        '401':
+                $ref: "#/components/schemas/Budgets"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-budgets
       x-stoplight:
         id: sbc5n7mfhtosy
@@ -321,36 +328,36 @@ paths:
       tags:
         - Budgets
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Budget'
-        '400':
+                $ref: "#/components/schemas/Budget"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '422':
+                $ref: "#/components/schemas/Message"
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationErrors'
-        '500':
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: post-client-budgets
       x-stoplight:
         id: ynoabkwfzxccn
@@ -361,8 +368,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoreBudgetRequest'
-  '/client/budgets/{id}':
+              $ref: "#/components/schemas/StoreBudgetRequest"
+  "/client/budgets/{id}":
     parameters:
       - schema:
           type: string
@@ -374,30 +381,30 @@ paths:
       tags:
         - Budgets
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Budget'
-        '401':
+                $ref: "#/components/schemas/Budget"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '404':
+                $ref: "#/components/schemas/Message"
+        "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-budgets-id
       x-stoplight:
         id: k8buy2ptfptwh
@@ -409,38 +416,38 @@ paths:
       tags:
         - Budgets
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 type: object
                 properties: {}
-        '400':
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
                 type: object
                 properties: {}
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationErrors'
-        '500':
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: patch-client-budgets-id
       x-stoplight:
         id: afchq8qzivpg6
@@ -451,37 +458,37 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoreBudgetRequest'
+              $ref: "#/components/schemas/StoreBudgetRequest"
     delete:
       summary: Delete budget
       tags:
         - Budgets
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '403':
+                $ref: "#/components/schemas/Message"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
                 type: object
                 properties: {}
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: delete-client-budgets-id
       x-stoplight:
         id: or3bz41k6biit
@@ -494,19 +501,19 @@ paths:
       tags:
         - Transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transactions'
-        '401':
+                $ref: "#/components/schemas/Transactions"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -533,36 +540,36 @@ paths:
       tags:
         - Transactions
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
-        '400':
+                $ref: "#/components/schemas/Transaction"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '422':
+                $ref: "#/components/schemas/Message"
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationErrors'
-        '500':
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: post-client-transactions
       x-stoplight:
         id: eaoh2w312pgmw
@@ -572,8 +579,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoreTransactionRequest'
-  '/client/transactions/{id}':
+              $ref: "#/components/schemas/StoreTransactionRequest"
+  "/client/transactions/{id}":
     parameters:
       - schema:
           type: string
@@ -585,36 +592,36 @@ paths:
       tags:
         - Transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
-        '401':
+                $ref: "#/components/schemas/Transaction"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '403':
+                $ref: "#/components/schemas/Message"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '404':
+                $ref: "#/components/schemas/Message"
+        "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-transactions-id
       x-stoplight:
         id: 4rgeoaaxnqych
@@ -625,36 +632,36 @@ paths:
       tags:
         - Transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
-        '400':
+                $ref: "#/components/schemas/Transaction"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '422':
+                $ref: "#/components/schemas/Message"
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationErrors'
-        '500':
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: patch-client-transactions-id
       x-stoplight:
         id: e2kok2u43q39i
@@ -665,36 +672,36 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoreTransactionRequest'
+              $ref: "#/components/schemas/StoreTransactionRequest"
     delete:
       summary: Delete transaction
       tags:
         - Transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '403':
+                $ref: "#/components/schemas/Message"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: delete-client-transactions-id
       x-stoplight:
         id: fq3thl0pcozm1
@@ -707,7 +714,7 @@ paths:
       tags:
         - Reports
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -741,24 +748,24 @@ paths:
                           type: integer
                   report_period:
                     type: string
-        '400':
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-reports-expenses-summary
       x-stoplight:
         id: oqcx0qz0vvcfs
@@ -782,7 +789,7 @@ paths:
       tags:
         - Reports
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -791,11 +798,11 @@ paths:
                 x-examples:
                   Example 1:
                     spending_trend:
-                      - date: '2023-10-01'
+                      - date: "2023-10-01"
                         total_spent: 100
-                      - date: '2023-10-02'
+                      - date: "2023-10-02"
                         total_spent: 150
-                      - date: '2023-10-03'
+                      - date: "2023-10-03"
                         total_spent: 200
                     total_spent_for_period: 450
                 required:
@@ -822,24 +829,24 @@ paths:
                     type: string
                     x-stoplight:
                       id: d1qoxmrio6j8x
-        '400':
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-reports-spending-trend
       security:
         - X-Api-Key: []
@@ -872,7 +879,7 @@ paths:
       tags:
         - Reports
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -914,24 +921,24 @@ paths:
                           type: string
                   report_period:
                     type: string
-        '400':
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '401':
+                $ref: "#/components/schemas/Message"
+        "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
-        '500':
+                $ref: "#/components/schemas/Message"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
       operationId: get-client-reports-budgets-summary
       x-stoplight:
         id: w4wji8rqvhskj
@@ -949,18 +956,84 @@ paths:
           name: end_date
           required: true
       description: Compare the user's planned budgets to actual spending for a given period
+  /client/users/profile:
+    parameters: []
+    get:
+      summary: Get user profile
+      tags:
+        - Users
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      operationId: get-client-users-profile
+      x-stoplight:
+        id: 6bo42m1rlh0gc
+      description: Get user profile
+      security:
+        - X-Api-Key: []
+  /client/users/profile/metadata:
+    parameters: []
+    patch:
+      summary: Update user metadata
+      tags:
+        - Users
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Metadata"
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
+          description: Internal Server Error
+      operationId: patch-client-users-profile-metadata
+      description: Update user metadata
+      security:
+        - X-Api-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreUserMetadataRequest"
+      x-stoplight:
+        id: 7m66qz8ibdoi2
 components:
   schemas:
     User:
-      title: User
-      x-stoplight:
-        id: 9xxxwhr92r5rz
       type: object
+      x-examples: {}
+      required:
+        - id
+        - name
+        - status
+        - metadata
       properties:
         id:
           type: string
-          x-stoplight:
-            id: x22orb1yy5mep
+        name:
+          type: string
+        status:
+          type: string
+        metadata:
+          $ref: "#/components/schemas/Metadata"
     Category:
       type: object
       x-examples: {}
@@ -1116,7 +1189,7 @@ components:
           x-stoplight:
             id: wiuxhul5n4re6
         receipt:
-          $ref: '#/components/schemas/FileUpload'
+          $ref: "#/components/schemas/FileUpload"
         created_at:
           type: string
     FileUpload:
@@ -1146,6 +1219,24 @@ components:
           type: string
           x-stoplight:
             id: ci81t01j5ks5o
+    Metadata:
+      title: Metadata
+      x-stoplight:
+        id: k60p59ii0tzym
+      type: object
+      required:
+        - default_currency
+        - budget_cycle_start_day
+      properties:
+        default_currency:
+          type: string
+          x-stoplight:
+            id: pw5ilhbi8vtb5
+          default: GHS
+        budget_cycle_start_day:
+          type: integer
+          x-stoplight:
+            id: me4bvrjdit6oc
     Message:
       title: Message
       x-stoplight:
@@ -1164,14 +1255,14 @@ components:
         id: a62n1im3mczqi
       type: array
       items:
-        $ref: '#/components/schemas/Category'
+        $ref: "#/components/schemas/Category"
     Budgets:
       title: Budgets
       x-stoplight:
         id: nx3kcgl8ax40q
       type: array
       items:
-        $ref: '#/components/schemas/Budget'
+        $ref: "#/components/schemas/Budget"
     Transactions:
       title: Transactions
       x-stoplight:
@@ -1186,7 +1277,7 @@ components:
           x-stoplight:
             id: gixxu1u7l8639
           items:
-            $ref: '#/components/schemas/Transaction'
+            $ref: "#/components/schemas/Transaction"
         meta:
           type: object
           x-stoplight:
@@ -1339,7 +1430,24 @@ components:
           x-stoplight:
             id: pgswijjfcbv9i
         receipt:
-          $ref: '#/components/schemas/FileUpload'
+          $ref: "#/components/schemas/FileUpload"
+    StoreUserMetadataRequest:
+      title: StoreUserMetadataRequest
+      x-stoplight:
+        id: p99fhqc7esila
+      type: object
+      required:
+        - default_currency
+        - budget_cycle_start_day
+      properties:
+        default_currency:
+          type: string
+          x-stoplight:
+            id: 21zrf090w0shf
+        budget_cycle_start_day:
+          type: string
+          x-stoplight:
+            id: y7rgckyu7vba3
   securitySchemes:
     X-Api-Key:
       name: X-Api-Key
@@ -1349,5 +1457,7 @@ tags:
   - name: Accounts
   - name: Budgets
   - name: Categories
+  - name: Notifications
   - name: Reports
   - name: Transactions
+  - name: Users
