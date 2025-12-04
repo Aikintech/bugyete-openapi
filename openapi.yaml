@@ -37,6 +37,14 @@ paths:
       description: Get categories
       security:
         - X-Api-Key: []
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - EXPENSE
+              - INCOME
+          in: query
+          name: type
     post:
       summary: Create category
       tags:
@@ -274,7 +282,6 @@ paths:
         - schema:
             type: string
             enum:
-              - ALL
               - EXPENSE
               - INCOME
           in: query
@@ -949,18 +956,84 @@ paths:
           name: end_date
           required: true
       description: Compare the user's planned budgets to actual spending for a given period
+  /client/users/profile:
+    parameters: []
+    get:
+      summary: Get user profile
+      tags:
+        - Users
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      operationId: get-client-users-profile
+      x-stoplight:
+        id: 6bo42m1rlh0gc
+      description: Get user profile
+      security:
+        - X-Api-Key: []
+  /client/users/profile/metadata:
+    parameters: []
+    patch:
+      summary: Update user metadata
+      tags:
+        - Users
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Metadata"
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrors"
+        "500":
+          description: Internal Server Error
+      operationId: patch-client-users-profile-metadata
+      description: Update user metadata
+      security:
+        - X-Api-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreUserMetadataRequest"
+      x-stoplight:
+        id: 7m66qz8ibdoi2
 components:
   schemas:
     User:
-      title: User
-      x-stoplight:
-        id: 9xxxwhr92r5rz
       type: object
+      x-examples: {}
+      required:
+        - id
+        - name
+        - status
+        - metadata
       properties:
         id:
           type: string
-          x-stoplight:
-            id: x22orb1yy5mep
+        name:
+          type: string
+        status:
+          type: string
+        metadata:
+          $ref: "#/components/schemas/Metadata"
     Category:
       type: object
       x-examples: {}
@@ -1099,10 +1172,6 @@ components:
           type: string
         category_id:
           type: string
-        budget_id:
-          type: string
-          x-stoplight:
-            id: o4izjcpv51qsx
         amount:
           type: integer
         currency:
@@ -1150,6 +1219,24 @@ components:
           type: string
           x-stoplight:
             id: ci81t01j5ks5o
+    Metadata:
+      title: Metadata
+      x-stoplight:
+        id: k60p59ii0tzym
+      type: object
+      required:
+        - default_currency
+        - budget_cycle_start_day
+      properties:
+        default_currency:
+          type: string
+          x-stoplight:
+            id: pw5ilhbi8vtb5
+          default: GHS
+        budget_cycle_start_day:
+          type: integer
+          x-stoplight:
+            id: me4bvrjdit6oc
     Message:
       title: Message
       x-stoplight:
@@ -1344,6 +1431,23 @@ components:
             id: pgswijjfcbv9i
         receipt:
           $ref: "#/components/schemas/FileUpload"
+    StoreUserMetadataRequest:
+      title: StoreUserMetadataRequest
+      x-stoplight:
+        id: p99fhqc7esila
+      type: object
+      required:
+        - default_currency
+        - budget_cycle_start_day
+      properties:
+        default_currency:
+          type: string
+          x-stoplight:
+            id: 21zrf090w0shf
+        budget_cycle_start_day:
+          type: string
+          x-stoplight:
+            id: y7rgckyu7vba3
   securitySchemes:
     X-Api-Key:
       name: X-Api-Key
@@ -1353,5 +1457,7 @@ tags:
   - name: Accounts
   - name: Budgets
   - name: Categories
+  - name: Notifications
   - name: Reports
   - name: Transactions
+  - name: Users
