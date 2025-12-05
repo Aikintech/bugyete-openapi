@@ -1115,25 +1115,38 @@ components:
       x-examples: {}
       required:
         - id
+        - user_id
         - category_id
         - amount
         - currency
         - period
         - start_date
+        - end_date
         - is_recurring
         - alert_threshold
         - created_at
       properties:
         id:
           type: string
+        user_id:
+          type: string
+          x-stoplight:
+            id: o0mnnukacf1u0
         category_id:
           type: string
+          x-stoplight:
+            id: tgotbxtwcyeo0
         amount:
           type: integer
         currency:
           type: string
         period:
-          type: string
+          enum:
+            - DAILY
+            - WEEKLY
+            - MONTHLY
+            - YEARLY
+            - ONE TIME
         start_date:
           type: string
           x-stoplight:
@@ -1150,6 +1163,8 @@ components:
             type: integer
         created_at:
           type: string
+        summary:
+          $ref: "#/components/schemas/BudgetSummary"
     Transaction:
       type: object
       x-examples: {}
@@ -1209,6 +1224,35 @@ components:
           type: string
           x-stoplight:
             id: 76isy9cakkp58
+    BudgetSummary:
+      title: BudgetSummary
+      x-stoplight:
+        id: 6f8f1b85pk1sq
+      type: object
+      required:
+        - category_name
+        - amount_spent
+        - amount_left
+      properties:
+        category_name:
+          type: string
+          x-stoplight:
+            id: fhf3n9wr4c3c2
+        amount_spent:
+          type: number
+          x-stoplight:
+            id: pd42a7b8mk67m
+        amount_left:
+          type: number
+          x-stoplight:
+            id: 3dpo055gr7gvn
+        spending_status:
+          x-stoplight:
+            id: b24krnxkb6q6l
+          enum:
+            - UNDERSPENDING
+            - OVERSPENDING
+            - ON BUDGET
     Notification:
       title: Notification
       x-stoplight:
