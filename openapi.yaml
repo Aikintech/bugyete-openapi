@@ -979,6 +979,29 @@ paths:
       description: Get user profile
       security:
         - X-Api-Key: []
+  /client/users/onboarding/status:
+    parameters: []
+    get:
+      summary: Get user onboarding status
+      tags:
+        - Users
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserOnboardingStatus"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      operationId: get-client-users-onboarding-status
+      x-stoplight:
+        id: 2owwb26y3ar0b
+      description: Get user onboarding status
+      security:
+        - X-Api-Key: []
   /client/users/profile/metadata:
     parameters: []
     patch:
@@ -1115,25 +1138,38 @@ components:
       x-examples: {}
       required:
         - id
+        - user_id
         - category_id
         - amount
         - currency
         - period
         - start_date
+        - end_date
         - is_recurring
         - alert_threshold
         - created_at
       properties:
         id:
           type: string
+        user_id:
+          type: string
+          x-stoplight:
+            id: o0mnnukacf1u0
         category_id:
           type: string
+          x-stoplight:
+            id: tgotbxtwcyeo0
         amount:
           type: integer
         currency:
           type: string
         period:
-          type: string
+          enum:
+            - DAILY
+            - WEEKLY
+            - MONTHLY
+            - YEARLY
+            - ONE TIME
         start_date:
           type: string
           x-stoplight:
@@ -1150,6 +1186,8 @@ components:
             type: integer
         created_at:
           type: string
+        summary:
+          $ref: "#/components/schemas/BudgetSummary"
     Transaction:
       type: object
       x-examples: {}
@@ -1209,6 +1247,35 @@ components:
           type: string
           x-stoplight:
             id: 76isy9cakkp58
+    BudgetSummary:
+      title: BudgetSummary
+      x-stoplight:
+        id: 6f8f1b85pk1sq
+      type: object
+      required:
+        - category_name
+        - amount_spent
+        - amount_left
+      properties:
+        category_name:
+          type: string
+          x-stoplight:
+            id: fhf3n9wr4c3c2
+        amount_spent:
+          type: number
+          x-stoplight:
+            id: pd42a7b8mk67m
+        amount_left:
+          type: number
+          x-stoplight:
+            id: 3dpo055gr7gvn
+        spending_status:
+          x-stoplight:
+            id: b24krnxkb6q6l
+          enum:
+            - UNDERSPENDING
+            - OVERSPENDING
+            - ON BUDGET
     Notification:
       title: Notification
       x-stoplight:
@@ -1299,6 +1366,31 @@ components:
               type: integer
               x-stoplight:
                 id: bpywqmm1fqchb
+    UserOnboardingStatus:
+      title: UserOnboardingStatus
+      x-stoplight:
+        id: 2aevrs92z5rdr
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          x-stoplight:
+            id: 31kic7cje7zdi
+          enum:
+            - COMPLETE
+            - PENDING
+        missing_steps:
+          type: array
+          x-stoplight:
+            id: bq1tn4hfce1r2
+          items:
+            x-stoplight:
+              id: gbpmsnveipxz1
+            enum:
+              - SET_PREFERENCES
+              - SET_BUDGETS
+              - CREATE_ACCOUNT
     ValidationErrors:
       title: ValidationErrors
       x-stoplight:
