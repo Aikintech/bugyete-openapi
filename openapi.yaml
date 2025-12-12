@@ -979,6 +979,29 @@ paths:
       description: Get user profile
       security:
         - X-Api-Key: []
+  /client/users/onboarding/status:
+    parameters: []
+    get:
+      summary: Get user onboarding status
+      tags:
+        - Users
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserOnboardingStatus"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      operationId: get-client-users-onboarding-status
+      x-stoplight:
+        id: 2owwb26y3ar0b
+      description: Get user onboarding status
+      security:
+        - X-Api-Key: []
   /client/users/profile/metadata:
     parameters: []
     patch:
@@ -1343,6 +1366,31 @@ components:
               type: integer
               x-stoplight:
                 id: bpywqmm1fqchb
+    UserOnboardingStatus:
+      title: UserOnboardingStatus
+      x-stoplight:
+        id: 2aevrs92z5rdr
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          x-stoplight:
+            id: 31kic7cje7zdi
+          enum:
+            - COMPLETE
+            - PENDING
+        missing_steps:
+          type: array
+          x-stoplight:
+            id: bq1tn4hfce1r2
+          items:
+            x-stoplight:
+              id: gbpmsnveipxz1
+            enum:
+              - SET_PREFERENCES
+              - SET_BUDGETS
+              - CREATE_ACCOUNT
     ValidationErrors:
       title: ValidationErrors
       x-stoplight:
